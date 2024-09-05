@@ -1,6 +1,8 @@
 import express, { json } from "express";
 import cors from "cors";
-import cookieParser from 'cookie-parser';
+import cookieParser from "cookie-parser";
+import errorHandler from "./middlewares/error.middlewares.js";
+
 
 const app = express();
 
@@ -27,8 +29,15 @@ app.use(cookieParser);
 
 // ! import routes
 import healthckeckRouter from "./routes/healthckeck.routes.js";
+import userRouter from "./routes/user.routes.js";
 
-// Routes
+
+// !Routes
 app.use("/api/v1/healthckeck", healthckeckRouter);
+app.use("/api/v1/users", userRouter);
 
+
+
+
+app.use(errorHandler)
 export { app };
